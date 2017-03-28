@@ -1,5 +1,5 @@
 //==================================================================================================
-// This is the Jenkins pipeline script for building the OMAR omar-hibernate-spatial plugin.
+// This is the Jenkins pipeline script for building the omar-hibernate-spatial plugin.
 // Environment varialbes that MUST be passed in by Jenkins:
 //    OSSIM_GIT_BRANCH: The tag of the branch to be built. Typically dev or master.
 //
