@@ -38,7 +38,7 @@ node("master"){
         // cd into the code directory to pick up the local build.gradle when building
         // build the plugin
         sh """
-        pushd ${workspaceDir}/${appName}/plugins/omar-hibernate-spatial
+        pushd ${workspaceDir}/${appName}/plugins/omar-hibernate-spatial-plugin
         ./gradlew install
         popd
         """
