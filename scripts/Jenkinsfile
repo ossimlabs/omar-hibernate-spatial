@@ -15,6 +15,7 @@ node("master"){
     def workspaceDir = pwd()
     def appName = "omar-hibernate-spatial"
     def omarCommonProjName = "omar-common"
+    env.OMAR_COMMON_PROPERTIES="${workspaceDir}/${omarCommonProjName}/omar-common-properties.gradle"
 
     stage("Checkout"){
         dir("ossim-ci") {
@@ -32,19 +33,15 @@ node("master"){
     }
 
     try {
-      stage("Build"){
-        env.OMAR_COMMON_PROPERTIES="${workspaceDir}/${omarCommonProjName}/omar-common-properties.gradle"
-
-        // cd into the code directory to pick up the local build.gradle when building
-        // build the plugin
+     stage ("Publish Plugin Artifactory")
+      {
         sh """
-        pushd ${workspaceDir}/${appName}/plugins/omar-hibernate-spatial-plugin
-        ./gradlew install
+        pushd ${workspaceDir}/${appName}/plugins/${appName}-plugin
+        ./gradlew artifactoryPublish
         popd
         """
-
       }
-    }
+     }
     catch(e){
         echo e.toString()
         currentBuild.result = "FAILED"
