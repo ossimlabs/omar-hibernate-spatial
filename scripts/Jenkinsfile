@@ -32,23 +32,6 @@ node(""){
     }
 
     try {
-        stage('SonarQube analysis') {
-            withSonarQubeEnv('sonarqube') {
-                // requires SonarQube Scanner for Gradle 2.1+
-                // It's important to add --info because of SONARJNKNS-281
-                sh """
-                  pushd ${workspaceDir}/${appName}/plugins/${appName}-plugin
-                  ./gradlew --info sonarqube
-                  popd
-                """
-            }
-        }
-    }
-    catch (e) {
-        echo e.toString()
-    }
-
-    try {
         stage ("Publish Plugin Artifactory")
         {
             withCredentials([[$class: 'UsernamePasswordMultiBinding', 
@@ -68,6 +51,23 @@ node(""){
         echo e.toString()
         currentBuild.result = "FAILED"
         notifyObj?.notifyFailed()
+    }
+    
+    try {
+        stage('SonarQube analysis') {
+            withSonarQubeEnv('sonarqube') {
+                // requires SonarQube Scanner for Gradle 2.1+
+                // It's important to add --info because of SONARJNKNS-281
+                sh """
+                  pushd ${workspaceDir}/${appName}/plugins/${appName}-plugin
+                  ./gradlew --info sonarqube
+                  popd
+                """
+            }
+        }
+    }
+    catch (e) {
+        echo e.toString()
     }
   stage("Clean Workspace"){
      step([$class: 'WsCleanup'])
