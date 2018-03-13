@@ -44,7 +44,7 @@ ext {
 repositories {
   maven { url "${ossimMavenProxy}" }
   if( Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
-    mavenLOcal()
+    mavenLocal()
     maven { url "http://download.osgeo.org/webdav/geotools" }
     mavenCentral()
     maven { url "https://repo.grails.org/grails/core" }
