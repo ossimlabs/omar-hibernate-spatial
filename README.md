@@ -26,5 +26,5 @@ Only required for Jenkins pipelines or if you are running Artifactory and/or Ope
 3. Install omar-hibernate-spatial-plugin
 ```
  cd omar-hibernate-spatial/plugins/omar-hibernate-spatial-plugin
- ./gradlew clean install
+ gradle clean install
 ```
