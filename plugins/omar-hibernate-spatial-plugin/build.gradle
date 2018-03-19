@@ -112,6 +112,7 @@ grailsPublish {
   portalPassword = ""
 }
 
+/*
 publishing {
   publications {
     mavenJava(MavenPublication) {
@@ -119,3 +120,4 @@ publishing {
     }
   }
 }
+*/
