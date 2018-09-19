@@ -2,7 +2,7 @@
 
 Incorporates [Hibernate Spatial](http://www.hibernatespatial.org/) geospatial database engine into OMAR applications. This repository is checked out by multiple Jenkins pipelines and built as a gradle plugin by each app's gradle build.
 
-[![Build Status](https://jenkins.radiantbluecloud.com/buildStatus/icon?job=omar-hibernate-spatial-dev)]()
+[![Build Status](https://jenkins.ossim.io/buildStatus/icon?job=omar-hibernate-spatial-dev)]()
 
 ### Required environment variable
 - OMAR_COMMON_PROPERTIES
