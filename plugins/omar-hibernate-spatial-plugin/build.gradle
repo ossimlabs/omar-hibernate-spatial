@@ -53,13 +53,6 @@ repositories {
   }
 }
 
-// dependencyManagement {
-//   imports {
-//     mavenBom "org.grails:grails-bom:$grailsVersion"
-//   }
-//   applyMavenExclusions false
-// }
-
 dependencies {
 
   compile "org.hibernate:hibernate-spatial:${hibernateSpatialV}"
