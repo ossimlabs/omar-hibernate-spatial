@@ -4,11 +4,7 @@ pluginManagement {
     gradlePluginPortal()
   }
 }
-def final O2_DEV_HOME = System.getenv('O2_DEV_HOME')
 
-if ( O2_DEV_HOME ) {
+include 'omar-hibernate-spatial-plugin'
 
-   include 'omar-hibernate-spatial-plugin'
-
-   project(':omar-hibernate-spatial-plugin').projectDir = "${O2_DEV_HOME}/omar-hibernate-spatial/plugins/omar-hibernate-spatial-plugin" as File
-}
+project(':omar-hibernate-spatial-plugin').projectDir = "${rootProject.projectDir}/plugins/omar-hibernate-spatial-plugin" as File
