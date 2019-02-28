@@ -73,6 +73,8 @@ dependencies {
 
 }
 
+bootRepackage.enabled = false
+
 assets {
   packagePlugin = true
 }
