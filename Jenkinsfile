@@ -36,7 +36,7 @@ node("${BUILD_NODE}"){
             -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
         """
         archiveArtifacts "plugins/*/build/libs/*.jar"
-        archiveArtifacts "apps/*/build/libs/*.jar"
+        //archiveArtifacts "apps/*/build/libs/*.jar"
     }
 
     stage ("Publish Nexus")
@@ -52,7 +52,7 @@ node("${BUILD_NODE}"){
             """
         }
     }
-
+/*
     stage ("Publish Docker App")
     {
         withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -87,6 +87,7 @@ node("${BUILD_NODE}"){
     } catch (e) {
         echo e.toString()
     }
+*/
 
     stage("Clean Workspace")
     {
