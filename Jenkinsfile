@@ -8,38 +8,7 @@ properties([
   disableConcurrentBuilds()
 ])
 
-podTemplate(
-  containers: [
-    containerTemplate(
-      name: 'docker',
-      image: 'docker:19.03.11',
-      ttyEnabled: true,
-      command: 'cat',
-      privileged: true
-    ),
-    containerTemplate(
-      image: "${DOCKER_REGISTRY_DOWNLOAD_URL}/alpine/helm:3.2.3",
-      name: 'helm',
-      command: 'cat',
-      ttyEnabled: true
-    ),
-    containerTemplate(
-      name: 'git',
-      image: 'alpine/git:latest',
-      ttyEnabled: true,
-      command: 'cat',
-      envVars: [
-        envVar(key: 'HOME', value: '/root')
-      ]
-    )
-  ],
-  volumes: [
-    hostPathVolume(
-      hostPath: '/var/run/docker.sock',
-      mountPath: '/var/run/docker.sock'
-    ),
-  ]
-) {
+podTemplate() {
   node(POD_LABEL) {
     stage("Checkout branch") {
       scmVars = checkout(scm)
