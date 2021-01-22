@@ -15,7 +15,7 @@ podTemplate() {
 
       GIT_BRANCH_NAME = scmVars.GIT_BRANCH
       BRANCH_NAME = """${sh(returnStdout: true, script: "echo ${GIT_BRANCH_NAME} | awk -F'/' '{print \$2}'").trim()}"""
-      GRADLE_BUILD_VERSION = sh(returnStdout: true, script: "grep buildVersion gradle.properties").trim()
+      GRADLE_BUILD_VERSION = sh(returnStdout: true, script: 'grep -Po "(?<=buildVersion=).*" gradle.properties').trim()
 
       script {
         if (BRANCH_NAME == 'master') {
