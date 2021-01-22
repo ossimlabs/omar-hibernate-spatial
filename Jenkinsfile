@@ -59,7 +59,7 @@ podTemplate(
 
       script {
         if (BRANCH_NAME == 'master') {
-          TAG_NAME = GRADLE_APP_VERSION
+          TAG_NAME = VERSION
           buildName "${VERSION} - ${BRANCH_NAME}"
         } else {
           TAG_NAME = BRANCH_NAME + "-" + System.currentTimeMillis()
