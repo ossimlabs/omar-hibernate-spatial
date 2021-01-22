@@ -54,7 +54,7 @@ podTemplate(
 
       VERSION = readFile("buildVersion.txt").trim()
 
-      GIT_TAG_NAME = "omar-hibernate-spatial" + "-" + VERSION
+      GIT_TAG_NAME = "omar-hibernate-spatial-" + VERSION
       ARTIFACT_NAME = "ArtifactName"
 
       script {
