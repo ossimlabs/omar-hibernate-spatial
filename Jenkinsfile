@@ -1,11 +1,7 @@
 properties([
-  parameters([
-      string(name: 'DOCKER_REGISTRY_DOWNLOAD_URL', defaultValue: 'nexus-docker-private-group.ossim.io', description: 'Repository of docker images')
-  ]),
   pipelineTriggers([[$class: "GitHubPushTrigger"]]),
   [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ossimlabs/omar-hibernate-spatial'],
-  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '20')),
-  disableConcurrentBuilds()
+  buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '20'))
 ])
 
 podTemplate() {
