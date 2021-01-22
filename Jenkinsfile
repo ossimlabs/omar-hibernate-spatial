@@ -15,24 +15,13 @@ podTemplate() {
 
       GIT_BRANCH_NAME = scmVars.GIT_BRANCH
       BRANCH_NAME = """${sh(returnStdout: true, script: "echo ${GIT_BRANCH_NAME} | awk -F'/' '{print \$2}'").trim()}"""
-
-      sh """
-        touch buildVersion.txt
-        grep buildVersion gradle.properties | cut -d "=" -f2 > "buildVersion.txt"
-      """
-
-      VERSION = readFile("buildVersion.txt").trim()
-
-      GIT_TAG_NAME = "omar-hibernate-spatial-" + VERSION
-      ARTIFACT_NAME = "ArtifactName"
+      GRADLE_BUILD_VERSION = sh(returnStdout: true, script: "grep buildVersion gradle.properties").trim()
 
       script {
         if (BRANCH_NAME == 'master') {
-          TAG_NAME = VERSION
-          buildName "${VERSION} - ${BRANCH_NAME}"
+          buildName "${GRADLE_BUILD_VERSION} - ${BRANCH_NAME}"
         } else {
-          TAG_NAME = BRANCH_NAME + "-" + System.currentTimeMillis()
-          buildName "${VERSION} - ${BRANCH_NAME}-SNAPSHOT"
+          buildName "${GRADLE_BUILD_VERSION} - ${BRANCH_NAME}-SNAPSHOT"
         }
       }
     }
@@ -53,7 +42,6 @@ podTemplate() {
         ./gradlew assemble -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
         """
       archiveArtifacts "plugins/*/build/libs/*.jar"
-      //archiveArtifacts "apps/*/build/libs/*.jar"
     }
 
     stage("Publish Nexus") {
@@ -66,41 +54,5 @@ podTemplate() {
         """
       }
     }
-    /*
-        stage ("Publish Docker App")
-        {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                            credentialsId: 'dockerCredentials',
-                            usernameVariable: 'DOCKER_REGISTRY_USERNAME',
-                            passwordVariable: 'DOCKER_REGISTRY_PASSWORD']])
-            {
-                // Run all tasks on the app. This includes pushing to OpenShift and S3.
-                sh """
-                ./gradlew pushDockerImage \
-                    -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
-                """
-            }
-        }
-
-        try {
-            stage ("OpenShift Tag Image")
-            {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                credentialsId: 'openshiftCredentials',
-                                usernameVariable: 'OPENSHIFT_USERNAME',
-                                passwordVariable: 'OPENSHIFT_PASSWORD']])
-                {
-                    // Run all tasks on the app. This includes pushing to OpenShift and S3.
-                    sh """
-                        ./gradlew openshiftTagImage \
-                            -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
-
-                    """
-                }
-            }
-        } catch (e) {
-            echo e.toString()
-        }
-    */
   }
 }
