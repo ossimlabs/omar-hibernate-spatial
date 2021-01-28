@@ -14,6 +14,6 @@ dependencies {
     }
 
   compile "org.hibernate:hibernate-spatial:${hibernateCoreVersion}"
-  compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
+  compile group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
 
 }
