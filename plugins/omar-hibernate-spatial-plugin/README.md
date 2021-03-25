@@ -1,4 +1,4 @@
-#omar-hibernate-spatial-plugin
+# omar-hibernate-spatial-plugin
 
 This plugin is used by the following services:
 
