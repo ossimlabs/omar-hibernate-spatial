@@ -3,7 +3,7 @@ plugins {
 
 dependencies {
   implementation "org.hibernate:hibernate-spatial:${hibernateCoreVersion}"
-  implementation 'org.postgresql:postgresql'
+  implementation "org.postgresql:postgresql"
 }
 
 assets {
